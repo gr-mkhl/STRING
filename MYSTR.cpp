@@ -1,5 +1,7 @@
 #include <stdio.h>
 #include <string.h>
+#include <stdlib.h>
+#include <assert.h>
 
 size_t MyStrlen( const char* str );
 int MyPuts( const char* str );
@@ -8,25 +10,20 @@ char* MyStrcat( char* dest, const char* scr );
 int MyStrcmp( const char* lhs, const char* rhs );
 char* MyStrchr( const char* str, int ch ); //TODO - проверить работу
 char* MyStrdup( const char* str ); //TODO - проверить работу
-void MyStrrvs( char* str ); //TODO - проверить работу
+char* MyStrrvs( char* str ); //TODO - проверить работу
 char* MyFgets( char* str, int count, FILE* stream ); //TODO - проверить работу
 int MyFputs( const char* str, FILE* stream ); //TODO - проверить работу
+int MyAtoi( const char *str ); //TODO - проверить работу
 
 int main()
 {
-    char s1[] = "ABCDEFGHIJ";
-    char s2[] = "GOYDA3";
+    char s1[] = "122CDEFGHIJ";
+    char s2[] = "-1OYDA3";
     char s3[] = "GOYDA1";
-    size_t len = 0;
+    //size_t len = 0;
 
-    len = MyStrlen(s1);
-    printf("len = %zd\n", len);
-    int j = MyPuts(s1);
-    printf("j_status = %d\n", j);
-    printf("%s\n", MyStrcpy(s1, s2));
-    //printf("%s\n", MyStrcat(s1, s2));
-    printf("%d\n", MyStrcmp(s2, s3));
-    printf("%d\n", strcmp(s2, s3));
+    printf("<%d> <%d> <%d>", MyAtoi(s1), MyAtoi(s2), MyAtoi(s3));
+
     return 0;
 }
 
@@ -104,7 +101,7 @@ int MyStrcmp( const char* lhs, const char* rhs )
     return (int) rhs[i] - lhs[i] ;
 }
 
-char* MyStrchr( const char* str, int ch ) //TODO проверить работу
+char* MyStrchr( char* str, int ch ) //TODO проверить работу //const str??
 {
     assert(str);
 
@@ -113,7 +110,7 @@ char* MyStrchr( const char* str, int ch ) //TODO проверить работу
     {
         if (*str == '\0')
             return NULL;
-        str++
+        str++;
     }
 
     return str;
@@ -131,7 +128,7 @@ char* MyStrdup( const char* str ) //TODO - проверить работу
     return dup;
 }
 
-void MyStrrvs( char* str ) //TODO - проверить работу
+char* MyStrrvs( char* str ) //TODO - проверить работу
 {
     assert(str);
 
@@ -157,7 +154,7 @@ char* MyFgets( char* str, int count, FILE* stream ) //TODO - проверить 
         int ch = fgetc(stream);
         if (ch == EOF)
         {
-            str[i] = '\0'
+            str[i] = '\0';
             return str;
         }
         if (ch == '\n')
@@ -182,8 +179,35 @@ int MyFputs( const char* str, FILE* stream ) //TODO - проверить раб�
 
     while (str[i] != '\0')
     {
-        fputc(str[i++], F);
+        fputc(str[i++], stream);
     }
 
     return 1;
+}
+
+int MyAtoi( const char *str )
+{
+    int sign = 1;
+
+    int i = 0;
+    if (str[i] == '-')
+    {
+        sign = -1;
+        i++;
+    }
+    else if (str[i] == '+')
+    {
+        i++;
+    }
+
+    int num = 0;
+
+    while (str[i] >= '0' && str[i] <= '9')
+    {
+        num *= 10;
+        num += (int) (str[i] - '0');
+        i++;
+    }
+
+    return num * sign;
 }
