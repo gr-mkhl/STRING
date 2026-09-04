@@ -7,7 +7,7 @@ int main()
     char s3[] = "bebebe";
     char s4[] = "y p";
     //size_t len = 0;
-    printf("%s\n%s\n%s\n%s\n", MyStrstr(s1, s2), MyStrstr(s1, "kusa"), MyStrstr(s1, s3), MyStrstr(s1, s4));
+    printf("%s\n%s\n%s\n%s\n", MyStrchr(s1, 'k'), MyStrrchr(s1, 'k'), MyStrchr(s4, 'a'), MyStrrchr(s2, 'a'));
 
     return 0;
 }

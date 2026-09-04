@@ -12,6 +12,7 @@ char* MyStrcpy( char* dest, const char* scr );
 char* MyStrcat( char* dest, const char* scr );
 int MyStrcmp( const char* lhs, const char* rhs );
 char* MyStrchr( char* str, int ch ); //TODO - проверить работу
+char* MyStrrchr( char* str, int ch ); //TODO - проверить работу
 char* MyStrdup( const char* str ); //TODO - проверить работу
 char* MyStrrvs( char* str ); //TODO - проверить работу
 char* MyFgets( char* str, int count, FILE* stream ); //TODO - проверить работу

@@ -78,7 +78,6 @@ char* MyStrchr( char* str, int ch ) //TODO проверить работу //con
 {
     assert(str);
 
-    ch = (char) ch; //???
     while (*(str) != (char) ch)
     {
         if (*str == '\0')
@@ -87,6 +86,24 @@ char* MyStrchr( char* str, int ch ) //TODO проверить работу //con
     }
 
     return str;
+}
+
+char* MyStrrchr( char* str, int ch )
+{
+    assert(str);
+
+    char* temp = NULL;
+
+    while (*(str) != '\0')
+    {
+        if (*str == (char) ch )
+            temp = str;
+        str++;
+    }
+
+    return temp;
+
+
 }
 
 char* MyStrdup( const char* str ) //TODO - проверить работу
