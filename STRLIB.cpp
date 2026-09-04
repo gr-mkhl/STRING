@@ -107,7 +107,7 @@ char* MyStrrvs( char* str ) //TODO - проверить работу
 
     size_t len = MyStrlen(str);
 
-    for (int i = 0; i < len / 2; i++)
+    for (size_t i = 0; i < len / 2; i++)
     {
         char temp = str[i];
         str[i] = str[len - i - 1];
@@ -136,7 +136,7 @@ char* MyFgets( char* str, int count, FILE* stream ) //TODO - проверить 
             str[i + 1] = '\0';
             return str;
         }
-        str[i] = ch;
+        str[i] = (char) ch;
     }
     str[count - 1] = '\0';
 
@@ -201,7 +201,7 @@ char* MyItoa( int value, char* buf )
 
     do
     {
-        buf[len - 1 + is_minus] = '0' + (copy_abs_value % 10);
+        buf[len - 1 + is_minus] = (char) ('0' + copy_abs_value % 10);
         copy_abs_value /= 10;
         len--;
     } while (copy_abs_value > 0);
@@ -212,4 +212,33 @@ char* MyItoa( int value, char* buf )
     }
 
     return buf;
+}
+
+char* MyStrstr( char* str, const char* substr )
+{
+    assert(str);
+    assert(substr);
+
+    int i = 0, j = 0;
+    int begin = 0;
+    do
+    {
+        while (str[i] != substr[0])
+        {
+            if (str[i] == '\0')
+                return NULL;
+            i++;
+        }
+        j = 0;
+        begin = i;
+        while (str[i] == substr[j] && substr[j] != '\0' && str[i] != '\0')
+        {
+            i++;
+            j++;
+        }
+        if (str[i] == '\0')
+            return NULL;
+    } while (substr[j] != '\0');
+
+    return &str[begin];
 }
